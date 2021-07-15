@@ -14,6 +14,9 @@
 body{
   background-color: var(--color-1);
 }
+main{
+  padding: 0 30px;
+}
 .title1 {
   color: var(--color-2);
   font-size: large;

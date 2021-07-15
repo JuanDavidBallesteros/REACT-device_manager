@@ -1,26 +1,31 @@
 import React from 'react';
+import { alertConfiguration } from '../Alert';
 
 
-function Modal() {
+function Modal({ displayAlert }) {
+  const saveAction = () => {
+    alertConfiguration('success', 'Device Saved');
+    displayAlert();
+  }
   return (
-    <div class="modal fade w3-animate-zoom" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="alert alert-danger d-none" role="alert" id="alertModal">
+    <div className="modal fade w3-animate-zoom" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-content">
+          <div className="alert alert-danger d-none" role="alert" id="alertModal">
           </div>
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add new device</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">Add new device</h5>
+            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
             <form id="form">
               <input type="hidden" id="index" />
-              <div class="form-row">
-                <div class="col">
+              <div className="form-row">
+                <div className="col">
 
-                  <select class="form-control" id="zone">
+                  <select className="form-control" id="zone">
                     <option>Zone</option>
                     <option>Living room</option>
                     <option>Bed room 1</option>
@@ -31,12 +36,12 @@ function Modal() {
 
                 </div>
               </div>
-              <div class="form-row">
-                <div class="col">
-                  <input type="text" id="name" class="form-control" placeholder="Name" />
+              <div className="form-row">
+                <div className="col">
+                  <input type="text" id="name" className="form-control" placeholder="Name" />
                 </div>
-                <div class="col">
-                  <select class="form-control" id="deviceType">
+                <div className="col">
+                  <select className="form-control" id="deviceType">
                     <option>Device Type</option>
                     <option>Monitoring</option>
                     <option>Temperature</option>
@@ -45,15 +50,17 @@ function Modal() {
                     <option>Player</option>
                   </select>
                 </div>
-                <div class="col">
-                  <input type="text" id="id" class="form-control" placeholder="ID" />
+                <div className="col">
+                  <input type="text" id="id" className="form-control" placeholder="ID" />
                 </div>
               </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal" id="cancelDevice">Close</button>
-            <button type="button" class="btn btn-info" id="addDevice" >Save</button>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-outline-secondary" data-dismiss="modal" id="cancelDevice">Close</button>
+            <button type="button" className="btn btn-info" id="addDevice" data-dismiss="modal"
+              onClick={saveAction}
+            >Save</button>
           </div>
         </div>
       </div>

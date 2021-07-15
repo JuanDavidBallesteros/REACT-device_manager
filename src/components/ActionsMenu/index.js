@@ -1,7 +1,7 @@
 import React from 'react';
 import './ActionsMenu.css';
 
-function ActionsMenu({ displayAlert }) {
+function ActionsMenu({ displayModal }) {
   return (
     <div className="container-fluid boxHs">
       <h1 className="title">Devices</h1>
@@ -11,7 +11,7 @@ function ActionsMenu({ displayAlert }) {
         id="addDeviceButton"
         data-toggle="modal"
         data-target="#exampleModal"
-        onClick={displayAlert}
+        onClick={displayModal}
       >
         Add Device
       </button>
