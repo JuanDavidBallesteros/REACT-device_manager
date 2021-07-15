@@ -35,7 +35,7 @@ function Table() {
           {" "}
           {
             devices.map((device, index) =>
-              <Row device={device} index={index} />
+              <Row key={`row ${index}`} device={device} index={index} />
             )
           }
         </tbody>
