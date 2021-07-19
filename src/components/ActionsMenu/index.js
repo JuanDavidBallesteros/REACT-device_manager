@@ -1,10 +1,10 @@
 import React from 'react';
 import './ActionsMenu.css';
 
-function ActionsMenu({ displayModal }) {
+function ActionsMenu({ displayModal, title }) {
   return (
     <div className="container-fluid boxHs">
-      <h1 className="title">Devices</h1>
+      <h1 className="title">{title}</h1>
       <button
         type="button"
         className="btn btn-light"
