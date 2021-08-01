@@ -7,10 +7,12 @@ import Input from '../Input';
 import ModalFooter from './ModalFooter';
 
 
-function Modal({ displayAlert, update = false }) {
+function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData }) {
   const saveAction = () => {
+    sendData();
     alertConfiguration('success', 'Device Saved');
     displayAlert();
+    hideAlert();
   }
   return (
     <div className="modal fade w3-animate-zoom" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -27,21 +29,27 @@ function Modal({ displayAlert, update = false }) {
                     { value: 'Bathroom', tag: 'Bathroom' },
                     { value: 'Kitchen', tag: 'Kitchen' },
                   ]}
-                  fielName="Zone"
+                  name='zone'
+                  fieldName="Zone"
                   className='form-control'
+                  onChange={inputHandler}
                 />
               </div>
               <div className="form-row">
                 <div className="col">
                   <Input
+                    name='name'
                     placeholder="Name"
                     className='form-control'
+                    onInput={inputHandler}
                   />
                 </div>
                 <div className="col">
                   <Input
+                    name='id'
                     placeholder="ID"
                     className='form-control'
+                    onInput={inputHandler}
                   />
 
                 </div>
@@ -54,8 +62,10 @@ function Modal({ displayAlert, update = false }) {
                       { value: 'Player', tag: 'Player' },
                       { value: 'Light', tag: 'Light' },
                     ]}
-                    fielName="DeviceType"
+                    name='deviceType'
+                    fieldName="DeviceType"
                     className='form-control'
+                    onChange={inputHandler}
                   />
                 </div>
               </div>

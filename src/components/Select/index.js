@@ -1,10 +1,13 @@
 import React from 'react';
 
-function Select({ options = [], fielName = 'Empty', className }) {
+function Select({ options = [], fielName = 'Empty', className, onChange = () => { }, name }) {
   return (
 
     <div className="col">
-      <select className={className} id="zone">
+      <select className={className}
+        id={name}
+        onChange={onChange}
+      >
         <option value="">{fielName}</option>
         {options.map(({ value, tag }, index) => (
           <option key={`${fielName}-${value}-${index}`}
