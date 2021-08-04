@@ -1,7 +1,7 @@
 import React from 'react';
 import './ActionsMenu.css';
 
-function ActionsMenu({ displayModal, title, saveModal }) {
+function ActionsMenu({ displayModal, title }) {
   return (
     <div className="container-fluid boxHs">
       <h1 className="title">{title}</h1>
@@ -12,7 +12,6 @@ function ActionsMenu({ displayModal, title, saveModal }) {
         data-toggle="modal"
         data-target="#exampleModal"
         onClick={() => {
-          saveModal();
           displayModal();
         }}
       >

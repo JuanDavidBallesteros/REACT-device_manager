@@ -7,7 +7,10 @@ import Input from '../Input';
 import ModalFooter from './ModalFooter';
 
 
-function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData }) {
+function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData, object = {}, callback }) {
+  const test = () => {
+    console.log(object);
+  }
   const saveAction = () => {
     sendData();
     alertConfiguration('success', 'Device Saved');
@@ -33,6 +36,7 @@ function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData
                   fieldName="Zone"
                   className='form-control'
                   onChange={inputHandler}
+                  value={object.zone}
                 />
               </div>
               <div className="form-row">
@@ -41,7 +45,8 @@ function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData
                     name='name'
                     placeholder="Name"
                     className='form-control'
-                    onInput={inputHandler}
+                    onInput={() => { inputHandler(); callback(test); }}
+                    value={object.name}
                   />
                 </div>
                 <div className="col">
@@ -49,7 +54,8 @@ function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData
                     name='id'
                     placeholder="ID"
                     className='form-control'
-                    onInput={inputHandler}
+                    onInput={() => { inputHandler(); }}
+                    value={object.id}
                   />
 
                 </div>
@@ -66,6 +72,7 @@ function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData
                     fieldName="DeviceType"
                     className='form-control'
                     onChange={inputHandler}
+                    value={object.deviceType}
                   />
                 </div>
               </div>

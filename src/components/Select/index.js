@@ -1,12 +1,13 @@
 import React from 'react';
 
-function Select({ options = [], fielName = 'Empty', className, onChange = () => { }, name }) {
+function Select({ options = [], fielName = 'Empty', className, onChange = () => { }, name, value }) {
   return (
 
     <div className="col">
       <select className={className}
         id={name}
         onChange={onChange}
+        value={value}
       >
         <option value="">{fielName}</option>
         {options.map(({ value, tag }, index) => (

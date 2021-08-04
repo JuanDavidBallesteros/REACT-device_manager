@@ -3,7 +3,7 @@ import classNames from 'classname';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
-function ActionButton({ type, updateModal, onClick, index }) {
+function ActionButton({ type, updateEntity, index }) {
 
   return (
     <button
@@ -12,9 +12,10 @@ function ActionButton({ type, updateModal, onClick, index }) {
         'btn-primary': type === "edit",
         'btn-danger': type === "delete"
       })}
+      data-toggle="modal"
+      data-target="#exampleModal"
       onClick={(e) => {
-        updateModal(index);
-        onClick(e);
+        updateEntity(e, index);
       }}
     >
       {type === "edit" && <FontAwesomeIcon icon={faPencilAlt} />}

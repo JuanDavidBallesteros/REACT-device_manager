@@ -3,7 +3,7 @@ import './Table.css';
 import Thead from './Thead';
 import Row from './Row';
 
-function Table({ entities = [], updateModal, updateEntity }) {
+function Table({ entities = [], updateEntity }) {
   const columns = entities.length > 0 ? Object.keys(entities[0]) : [];
   return (
     <div className="container-fluid boxCentered">
@@ -13,7 +13,7 @@ function Table({ entities = [], updateModal, updateEntity }) {
           {""}
           {
             entities.map((entity, index) =>
-              <Row key={`row-${index}`} entity={entity} index={index} updateModal={updateModal} updateEntity={updateEntity} />
+              <Row key={`row-${index}`} entity={entity} index={index} updateEntity={updateEntity} />
             )
           }
         </tbody>

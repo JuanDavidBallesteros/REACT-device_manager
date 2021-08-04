@@ -13,12 +13,14 @@ export const listEntity = async ({ entity = 'devices' }) => {
 
 // Create
 export const createEntity = async ({ entity = 'devices', object, method = 'POST', idObject = null }) => {
+  console.log(object, method, idObject)
   try {
     let url = null;
     if (method === 'POST') {
       url = `${API_URL}/${entity}`;
     } else if (method === 'PUT' && idObject !== null) {
-      url = `${url}/${idObject}`;
+      url = `${API_URL}/${entity}/${idObject}`;
+      console.log('Entra')
     }
     if (!url) {
       throw new Error('Check the input')
@@ -37,5 +39,16 @@ export const createEntity = async ({ entity = 'devices', object, method = 'POST'
 
   } catch (error) {
     throw error;
+  }
+};
+
+// Get One
+export const getOne = async (entity = "devices", idObjeto) => {
+  try {
+    const answer = await fetch(`${API_URL}/${entity}/${idObjeto}`);
+    const data = await answer.json();
+    return data;
+  } catch (error) {
+    console.log({ error });
   }
 };

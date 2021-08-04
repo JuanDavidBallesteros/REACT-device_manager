@@ -1,7 +1,7 @@
 import React from 'react';
 import ActionButton from '../../ActionButton';
 
-function Row({ entity, index, updateModal, updateEntity }) {
+function Row({ entity, index, updateEntity }) {
 
   return (
     <tr>
@@ -12,7 +12,7 @@ function Row({ entity, index, updateModal, updateEntity }) {
       <td>{entity.id}</td>
       <td>
         <div className="btn-group" role="group" aria-label="Basic example">
-          <ActionButton type={'edit'} index={index} updateModal={updateModal} onClick={updateEntity} />
+          <ActionButton type={'edit'} index={index} updateEntity={updateEntity} />
           <ActionButton type={'delete'} />
         </div>
       </td>

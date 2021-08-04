@@ -4,7 +4,7 @@ import ActionsMenu from './components/ActionsMenu';
 import Table from './components/Table';
 import Modal from './components/Modal';
 import Alert from './components/Alert';
-import { listEntity, createEntity } from './Service';
+import { listEntity, createEntity, getOne } from './Service';
 
 class Page extends Component {
 
@@ -13,23 +13,18 @@ class Page extends Component {
     this.state = {
       showAlert: false,
       showModal: false,
-      isUpdate: false,
+      method: 'POST',
       entities: [],
       object: {},
+      idObject: null,
     };
   };
+  callback = (func) => {
+    func();
+  }
 
-  displayModal = () => {
-    this.setState({ showModal: true })
-    console.log(this.state.showModal)
-  };
-  saveModal = () => {
-    this.setState({ isUpdate: false })
-  };
-  updateModal = (index) => {
-    console.log(index);
-    this.setState({ isUpdate: true });
-    this.displayModal();
+  displayModal = (_e, method = 'POST') => {
+    this.setState({ showModal: true, method })
   };
   displayAlert = () => {
     this.setState({ showAlert: true })
@@ -57,23 +52,22 @@ class Page extends Component {
     let { object } = this.state;
     object = { ...object, [id]: value };
     this.setState({ object })
-    console.log(object);
+    //console.log(object)
   }
 
-  updateEntity = async (e) => {
-    console.log({ e });
-    /* const { entity } = this.props;
-    let { object } = this.state;
-    const method = 'PUT';
-    await createEntity({ entity, object, method, idObject });
-    this.getEntity(); */
+  updateEntity = async (_e, index) => {
+    const { entity } = this.props;
+    let object = await getOne(entity, index);
+    this.setState({ object, idObject: index }, () => {
+      //console.log(this.state.object)
+      this.displayModal(null, 'PUT');
+    })
   }
 
   createEntity = async () => {
     const { entity } = this.props;
-    let { object } = this.state;
-    const method = 'POST';
-    await createEntity({ entity, object, method });
+    let { object, method, idObject } = this.state;
+    await createEntity({ entity, object, method, idObject });
     this.getEntity();
   }
 
@@ -87,18 +81,19 @@ class Page extends Component {
           < Nav />
         </header>
         <main>
-          <ActionsMenu displayModal={this.displayModal} saveModal={this.saveModal} title={title} entity='devices' />
-          <Table entities={this.state.entities} updateModal={this.updateModal} updateEntity={this.updateEntity} />
+          <ActionsMenu displayModal={this.displayModal} title={title} entity='devices' />
+          <Table entities={this.state.entities} updateEntity={this.updateEntity} />
         </main>
-        {this.state.showModal &&
-          <Modal
-            displayAlert={this.displayAlert}
-            hideAlert={this.hideAlert}
-            inputHandler={this.inputHandler}
-            sendData={this.createEntity}
-            update={this.state.isUpdate}
-          />
-        }
+
+        <Modal
+          displayAlert={this.displayAlert}
+          hideAlert={this.hideAlert}
+          inputHandler={this.inputHandler}
+          sendData={this.createEntity}
+          object={this.state.object}
+          callback={this.callback}
+        />
+
       </>
     )
   }
