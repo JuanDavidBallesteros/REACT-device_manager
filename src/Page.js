@@ -4,7 +4,7 @@ import ActionsMenu from './components/ActionsMenu';
 import Table from './components/Table';
 import Modal from './components/Modal';
 import Alert from './components/Alert';
-import { listEntity, createEntity, getOne } from './Service';
+import { listEntity, createEntity, getOne, deleteEntity } from './Service';
 
 class Page extends Component {
 
@@ -24,10 +24,10 @@ class Page extends Component {
   }
 
   displayModal = (_e, method = 'POST') => {
-    this.setState({ showModal: true, method })
+    this.setState({ showModal: true, method });
   };
   displayAlert = () => {
-    this.setState({ showAlert: true })
+    this.setState({ showAlert: true });
   };
   hideAlert = () => {
     setTimeout(() => {
@@ -38,7 +38,7 @@ class Page extends Component {
   getEntity = async () => {
     const { entity } = this.props;
     const entities = await listEntity(entity);
-    this.setState({ entities })
+    this.setState({ entities });
   };
 
   componentDidMount() { //Call the method before change the virtual DOM
@@ -51,24 +51,28 @@ class Page extends Component {
     } = e;
     let { object } = this.state;
     object = { ...object, [id]: value };
-    this.setState({ object })
-    //console.log(object)
+    this.setState({ object });
   }
 
   updateEntity = async (_e, index) => {
     const { entity } = this.props;
     let object = await getOne(entity, index);
     this.setState({ object, idObject: index }, () => {
-      //console.log(this.state.object)
       this.displayModal(null, 'PUT');
     })
+  }
+
+  deEntity = async (_e, index) => {
+    const { entity } = this.props;
+    await deleteEntity({ entity, idObject: index });
+    this.getEntity(); /// NECESITO REFRESCAR NADA MÁS
   }
 
   createEntity = async () => {
     const { entity } = this.props;
     let { object, method, idObject } = this.state;
     await createEntity({ entity, object, method, idObject });
-    this.getEntity();
+    this.getEntity(entity, object, idObject);
   }
 
   //Render always is the last function
@@ -82,7 +86,7 @@ class Page extends Component {
         </header>
         <main>
           <ActionsMenu displayModal={this.displayModal} title={title} entity='devices' />
-          <Table entities={this.state.entities} updateEntity={this.updateEntity} />
+          <Table entities={this.state.entities} updateEntity={this.updateEntity} deEntity={this.deEntity} />
         </main>
 
         <Modal
@@ -93,7 +97,6 @@ class Page extends Component {
           object={this.state.object}
           callback={this.callback}
         />
-
       </>
     )
   }

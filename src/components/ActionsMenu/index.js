@@ -11,8 +11,8 @@ function ActionsMenu({ displayModal, title }) {
         id="addDeviceButton"
         data-toggle="modal"
         data-target="#exampleModal"
-        onClick={() => {
-          displayModal();
+        onClick={(e) => {
+          displayModal(e);
         }}
       >
         Add Device

@@ -45,7 +45,7 @@ function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData
                     name='name'
                     placeholder="Name"
                     className='form-control'
-                    onInput={() => { inputHandler(); callback(test); }}
+                    onInput={inputHandler}
                     value={object.name}
                   />
                 </div>
@@ -54,7 +54,7 @@ function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData
                     name='id'
                     placeholder="ID"
                     className='form-control'
-                    onInput={() => { inputHandler(); }}
+                    onInput={inputHandler}
                     value={object.id}
                   />
 

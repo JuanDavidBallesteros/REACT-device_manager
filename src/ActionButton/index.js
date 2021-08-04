@@ -3,8 +3,14 @@ import classNames from 'classname';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
-function ActionButton({ type, updateEntity, index }) {
-
+function ActionButton({ type, updateEntity, index, deEntity }) {
+  const clickButton = (e, index) => {
+    if (type === 'edit') {
+      updateEntity(e, index);
+    } else {
+      deEntity(e, index);
+    }
+  }
   return (
     <button
       type="button"
@@ -12,10 +18,16 @@ function ActionButton({ type, updateEntity, index }) {
         'btn-primary': type === "edit",
         'btn-danger': type === "delete"
       })}
-      data-toggle="modal"
-      data-target="#exampleModal"
+      data-toggle={classNames({
+        'modal': type === "edit",
+        '': type === "delete"
+      })}
+      data-target={classNames({
+        '#exampleModal': type === "edit",
+        '': type === "delete"
+      })}
       onClick={(e) => {
-        updateEntity(e, index);
+        clickButton(e, index);
       }}
     >
       {type === "edit" && <FontAwesomeIcon icon={faPencilAlt} />}

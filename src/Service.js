@@ -13,7 +13,6 @@ export const listEntity = async ({ entity = 'devices' }) => {
 
 // Create
 export const createEntity = async ({ entity = 'devices', object, method = 'POST', idObject = null }) => {
-  console.log(object, method, idObject)
   try {
     let url = null;
     if (method === 'POST') {
@@ -50,5 +49,22 @@ export const getOne = async (entity = "devices", idObjeto) => {
     return data;
   } catch (error) {
     console.log({ error });
+  }
+};
+
+// Delete
+export const deleteEntity = async ({ entity = 'devices', idObject = undefined }) => {
+  try {
+    let url = `${API_URL}/${entity}/${idObject}`;
+    if (idObject === undefined) {
+      throw new Error('Check the input');
+    }
+    const response = await fetch(url, {
+      method: 'DELETE',
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
   }
 };
