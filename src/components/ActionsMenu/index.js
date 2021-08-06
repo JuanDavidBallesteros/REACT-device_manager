@@ -15,7 +15,7 @@ function ActionsMenu({ displayModal, title }) {
           displayModal(e);
         }}
       >
-        Add Device
+        Add {title}
       </button>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Nav from './components/Nav';
+
 import ActionsMenu from './components/ActionsMenu';
 import Table from './components/Table';
 import Modal from './components/Modal';
@@ -19,9 +19,6 @@ class Page extends Component {
       idObject: null,
     };
   };
-  callback = (func) => {
-    func();
-  }
 
   displayModal = (_e, method = 'POST') => {
     this.setState({ showModal: true, method });
@@ -37,12 +34,14 @@ class Page extends Component {
 
   getEntity = async () => {
     const { entity } = this.props;
-    const entities = await listEntity(entity);
+    const entities = await listEntity({ entity });
     this.setState({ entities });
   };
 
   componentDidMount() { //Call the method before change the virtual DOM
+
     this.getEntity();
+    console.log(this.state)
   }
 
   inputHandler = (e) => {
@@ -81,11 +80,8 @@ class Page extends Component {
     return (
       <>
         {this.state.showAlert && <Alert />}
-        <header>
-          < Nav />
-        </header>
         <main>
-          <ActionsMenu displayModal={this.displayModal} title={title} entity='devices' />
+          <ActionsMenu displayModal={this.displayModal} title={title} entity={this.props.entity} />
           <Table entities={this.state.entities} updateEntity={this.updateEntity} deEntity={this.deEntity} />
         </main>
 
@@ -95,7 +91,7 @@ class Page extends Component {
           inputHandler={this.inputHandler}
           sendData={this.createEntity}
           object={this.state.object}
-          callback={this.callback}
+          title={title}
         />
       </>
     )

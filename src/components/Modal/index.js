@@ -7,10 +7,7 @@ import Input from '../Input';
 import ModalFooter from './ModalFooter';
 
 
-function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData, object = {}, callback }) {
-  const test = () => {
-    console.log(object);
-  }
+function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData, object = {}, title }) {
   const saveAction = () => {
     sendData();
     alertConfiguration('success', 'Device Saved');
@@ -21,7 +18,7 @@ function Modal({ displayAlert, hideAlert, update = false, inputHandler, sendData
     <div className="modal fade w3-animate-zoom" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
-          <ModalHeader />
+          <ModalHeader title={title} />
           <div className="modal-body">
             <form id="form">
               <div className="form-row">
