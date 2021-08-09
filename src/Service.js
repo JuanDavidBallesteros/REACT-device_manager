@@ -2,7 +2,6 @@ const API_URL = 'https://devices-backend.vercel.app';
 
 //list
 export const listEntity = async ({ entity = "devices" }) => {
-  console.log(entity)
   try {
     const response = await fetch(`${API_URL}/${entity}`);
     const data = await response.json();

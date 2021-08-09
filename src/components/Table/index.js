@@ -3,8 +3,8 @@ import './Table.css';
 import Thead from './Thead';
 import Row from './Row';
 
-function Table({ entities = [], updateEntity, deEntity }) {
-  const columns = entities.length > 0 ? Object.keys(entities[0]) : [];
+function Table({ entities = [], updateEntity, deEntity, columns = [] }) {
+
   return (
     <div className="container-fluid boxCentered">
       <table className="table table-dark">
@@ -13,7 +13,7 @@ function Table({ entities = [], updateEntity, deEntity }) {
           {""}
           {
             entities.map((entity, index) =>
-              <Row key={`row-${index}`} entity={entity} index={index} updateEntity={updateEntity} deEntity={deEntity} />
+              <Row key={`row-${index}`} entity={entity} index={index} updateEntity={updateEntity} deEntity={deEntity} columns={columns} />
             )
           }
         </tbody>

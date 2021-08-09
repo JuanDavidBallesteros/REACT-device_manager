@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Select({ options = [], fielName = 'Empty', className, onChange = () => { }, name, value }) {
+function Select({ options = [], fieldName = 'Empty', className, onChange = () => { }, name, value }) {
   return (
 
     <div className="col">
@@ -9,9 +9,9 @@ function Select({ options = [], fielName = 'Empty', className, onChange = () => 
         onChange={onChange}
         value={value}
       >
-        <option value="">{fielName}</option>
+        <option value="">{fieldName}</option>
         {options.map(({ value, tag }, index) => (
-          <option key={`${fielName}-${value}-${index}`}
+          <option key={`${fieldName}-${value}-${index}`}
             value={value}
           >
             {tag}

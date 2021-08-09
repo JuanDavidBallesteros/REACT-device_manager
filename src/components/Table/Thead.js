@@ -6,7 +6,7 @@ function Thead({ columns }) {
       <tr className="title1">
         <th scope="col">#</th>
         {columns.map((column) => (
-          <th scope="col">{column.toUpperCase()}</th>
+          <th key={`th-${column}`} scope="col">{column.toUpperCase()}</th>
         ))}
         <th scope="col"> </th>
       </tr>
